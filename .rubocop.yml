@@ -1,0 +1,27 @@
+AllCops:
+  Exclude:
+    - Guardfile
+    - spec/spec_helper.rb
+    - force_layout.gemspec
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  TargetRubyVersion: 2.5
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
