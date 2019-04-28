@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+$LOAD_PATH << File.expand_path(File.expand_path('../../lib', __FILE__))
+require 'recommendation'
+require 'redis'
+
+Recommendation.redis = Redis.new
+
+# load the data
+data = File.read(Dir.pwd + '/bin/read_data.json')
+json_data = JSON.parse(data)
+
+buckets = Hash.new { |h,k| h[k] = [] }
+data.each do |datum|
+  user_id = datum['user_id']
+  article_id = datum['article_id']
+  buckets[user_id] << article_id
+end
