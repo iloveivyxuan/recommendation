@@ -15,6 +15,20 @@ require 'recommendation'
 # it.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+
+def initialize_redis!
+  Recommendation.redis = Redis.new
+  Recommendation.redis.keys('recommendation_test*').each do |key|
+    Recommendation.redis.del(key)
+  end
+end
+
+class Recommendation::Base
+  def redis_prefix
+    'recommendation_test'
+  end
+end
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
