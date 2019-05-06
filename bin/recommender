@@ -15,3 +15,10 @@ data.each do |datum|
   article_id = datum['article_id']
   buckets[user_id] << article_id
 end
+
+# add views count in redis
+buckets.each do |user_id, articles|
+  articles = articles[0..99]
+  views = Recommendation::JaccardInputMatrix.new(redis_prefix: 'recommendation', action: 'views')
+  views.add_set(articles)
+end
